@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">  
+<title>Twitch Tv</title>
+
+
+
+
+
+</head>
+
+
+
+<body>
+<div id="all">
+<div class="text-center">
+	<h1 id="title">Twitch Streamers</h1>
+</div>
+<!-- **********************************<Channel "FreeCodeCamp"> *************************************************** -->
+
+<div id="CH1" class="well">
+   <div  class="row vertical-align:middle">	
+
+	 
+	 <div class="col-xs-4 container">
+	  	<label style="font-size:20px"> Free Code Camp </label>
+	  	<div id="fccLogo">
+	  	   <a href="https://www.twitch.tv/freecodecamp"><img style="width:150px;height:120px" src="https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png"></a>
+	    </div>
+     </div>
+
+	   
+
+	  <div class="col-xs-4">
+	  	  <ul>
+	  	    <li>status:<a href="https://www.twitch.tv/freecodecamp"><span id="ch1Status"></span></a>
+	  	    <li>game:<span id="ch1Game"></span></li>	
+	    </div>
+
+	  <div class="col-xs-4"><p id="CH1stream"></p></div>
+   </div>
+</div>
+<!-- **********************************<Channel "test_channel" >*************************************************** -->
+
+<div id="CH2" class="well">
+	<div  class="row vertical-align:middle">
+
+	  <div class="col-xs-4 container">
+	  	<label style="font-size:20px"> Test Channel </label>
+	  	<div id="testLogo">
+	  	   
+	    </div>
+     </div>
+	 
+	  <div class="col-xs-4">
+	  	  <ul>
+	  	    <li>status:<a href="https://www.twitch.tv/test_channel"><span id="ch2Status"></span></a>
+	  	    <li>game:<span id="ch2Game"></span></li>	
+	  </div>
+
+	  <div class="col-xs-4"><p id="CH2stream"></p></div>
+
+   </div>
+</div>
+<!-- **********************************<Channel "ESL_SC2" >******************************************************** -->
+
+<div id="CH3" class="well">
+	<div  class="row vertical-align:middle">
+
+	<div class="col-xs-4 container">
+	  	<label style="font-size:20px"> ESL_S2 </label>
+	  	<div id="eslLogo">
+	  	   <a href="https://www.twitch.tv/esl_sc2"><img style="width:150px;height:120px" src="https://static-cdn.jtvnw.net/jtv_user_pictures/esl_sc2-profile_image-d6db9488cec97125-300x300.jpeg"></a>
+	    </div>
+     </div>
+
+	    <div class="col-xs-4">
+	  	  <ul>
+	  	    <li>status:<a href="https://www.twitch.tv/esl_sc2"><span id="ch3Status"></span></a>
+	  	    <li>game:<span id="ch3Game"></span></li>	
+	    </div>
+
+	  <div class="col-xs-4"><p id="CH3stream"></p></div>
+
+   </div>
+</div>
+
+</div>
+<!--*********************************************************************************************** -->
+<script>
+console.log("test");	
+$(function(){
+
+$.getJSON('https://wind-bow.gomix.me/twitch-api/streams/freecodecamp?callback=?', function(data) {  
+  var d=data;
+  // console.log(d);
+  if(d.stream==null){
+  	$("#CH1stream").html("offline");
+  	$('#ch1Status,#ch1Game').html(" this channel is currently offline")
+  	}
+  else{
+  	$("#CH1stream").html("online");
+  	$("#ch1Status").html(d.status);
+  	$("#ch1Game").html(d.game);
+    }
+
+});
+
+$.getJSON('https://wind-bow.gomix.me/twitch-api/streams/test_channel?callback=?',function(data){
+  var d=data;
+  var imgurl=d.logo;
+  if(d.stream==null){
+  	$('#CH2stream').html("offline");
+  	$('#ch2Status,#ch2Game').html(" this channel is currently offline");
+  	$('#testLogo').append('<a href="https://www.twitch.tv/test_channel"><img style="width:150px;height:120px" src="'+imgurl+'"></a>');
+  }
+  else{
+  	   $("#CH2stream").html("online");
+  	   $("#ch2Status").html(d.status);
+  	   $("#ch2Game").html(d.game);
+  	   $('#testLogo').append('<a href="https://www.twitch.tv/test_channel"><img style="width:150px;height:120px" src="'+imgurl+'"></a>');
+  }
+});
+
+$.getJSON('https://wind-bow.gomix.me/twitch-api/streams/esl_sc2?callback=?',function(data){
+  var d=data;
+  if(d.stream==null){
+  	$('#CH3stream').html("offline");
+  	$('#ch3Status,#ch3Game').html(" this channel is currently offline");
+
+  }
+  else{
+  	$("#CH3stream").html("online");
+    $("#ch3Status").html(d.status);
+    $('#ch3Game').html(d.game);
+  }
+});
+
+
+
+
+
+
+});	
+
+
+
+
+
+
+</script>
+
+
+<!--***************************************************************** -->
+<style>
+li{
+	font-size: 20px;
+   margin-top:30px;
+}
+
+body{
+	background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQfdTAI0Z6NLECPOyhpdgROfvUDPbe0nmYuUhuDODDqA5jOkPX');
+	background-repeat:no-repeat;
+	background-size:100%;
+	
+	
+}
+#title{
+	height: 80px;
+	text-align:center;
+	font-family:Lobster;
+	font-size:50px;
+}
+#CH1{
+	background-color:white;
+	height:200px;
+	vertical-align:center;
+
+}
+#CH2{
+	background-color:white;
+	height:200px;
+
+}
+#CH3{
+	background-color:white;
+	height:200px;
+}
+#CH1stream{
+ text-align:right;
+ font-size:30px;
+ margin-top:45px;
+ margin-right:10px;
+
+}
+#CH2stream{
+	text-align:right;
+	font-size:30px;
+	margin-top:45px;
+	margin-right:10px;
+}
+#CH3stream{
+	text-align:right;
+	font-size:30px;
+	margin-top:45px;
+	margin-right:10px;
+}
+
+</style>
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+</html>
